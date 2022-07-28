@@ -86,9 +86,39 @@ with st.form(key="my_form"):
                     """
             )
 
-        use_example = st.checkbox('🖼️ Use the example files')
+        use_example = st.checkbox('🖼️ Use the example run files')
 
         submit_button_classify = st.form_submit_button(label="🌌 Classify !")
+        
+    st.markdown("🎨 Images for the example run :  ")
+    # st.image(files)
+    files_example = [
+            "data"+ os.sep +"Cat.jpg",
+            "data"+ os.sep +"Dog.jpg",
+            "data"+ os.sep +"Castle.jpg",
+            "data"+ os.sep +"Elephant.jpg",
+            "data"+ os.sep +"A_team_working_in_data_science_project.jpg",
+            "data"+ os.sep +"An_excel_sheet.jpg"
+        ]
+
+    c290, c300, c310 = st.columns([1, 1, 1])
+
+    with c290:
+        st.image(files_example[0], width=100)
+        st.image(files_example[1], width=100)
+
+    with c300:
+        st.image(files_example[2], width=100)
+        st.image(files_example[3], width=100)
+
+    with c310:
+        st.image(files_example[4], width=100)
+        st.image(files_example[5], width=100)
+
+
+
+
+
 
 
 
@@ -101,16 +131,9 @@ if submit_button_classify:
     if use_example : 
         st.markdown("🗿 Show the results ( Example version ) :  ")
         # st.image(files)
-        files = [
-                "data"+ os.sep +"Cat.jpg",
-                "data"+ os.sep +"Dog.jpg",
-                "data"+ os.sep +"Castle.jpg",
-                "data"+ os.sep +"Elephant.jpg",
-                "data"+ os.sep +"A_team_working_in_data_science_project.jpg",
-                "data"+ os.sep +"An_excel_sheet.jpg"
-            ]
-        for i in range(len(files)):
-            st.image(files[i], width=100, caption=classify_image_in_text_file_version(files[i],text_possibilities=st.session_state.text_list))
+
+        for i in range(len(files_example)):
+            st.image(files_example[i], width=100, caption=classify_image_in_text_file_version(files_example[i],text_possibilities=st.session_state.text_list))
     else : 
         st.markdown("🗿 Show the results :  ")
         # st.image(files)
