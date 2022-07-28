@@ -34,7 +34,14 @@ with st.expander("ℹ️ - Information on this app", expanded=True):
 st.header('🦆 Insert the classes')
 
 if not "text_list" in st.session_state:
-    st.session_state.text_list = []
+    st.session_state.text_list = [
+        "Cat",
+        "Dog",
+        "Castle",
+        "Elephant",
+        "A team working in data science project",
+        "An excel sheet"
+        ]
 
 def add_classe_callback():
     st.session_state["text_field"] = ""
@@ -76,15 +83,36 @@ with st.form(key="my_form"):
                     """
             )
 
-        submit_button = st.form_submit_button(label="🌌 Classify !")
+        use_example = st.checkbox('🖼️ Use the example files')
+
+        submit_button_classify = st.form_submit_button(label="🌌 Classify !")
 
 
-if not submit_button:
+
+
+if not submit_button_classify  :
     st.stop()
-if submit_button:
-    st.markdown("🗿 Show the results :  ")
-    # st.image(files)
-    for i in range(len(files)):
-        st.image(files[i], width=100, caption=classify_image_in_text_file_version(files[i],text_possibilities=st.session_state.text_list))
+
+if submit_button_classify:
+
+    if use_example : 
+        st.markdown("🗿 Show the results ( Example version ) :  ")
+        # st.image(files)
+        files = [
+                "data"+ os.sep +"Cat.jpg",
+                "data"+ os.sep +"Dog.jpg",
+                "data"+ os.sep +"Castle.jpg",
+                "data"+ os.sep +"Elephant.jpg",
+                "data"+ os.sep +"A_team_working_in_data_science_project.jpg",
+                "data"+ os.sep +"An_excel_sheet.jpg"
+            ]
+        for i in range(len(files)):
+            st.image(files[i], width=100, caption=classify_image_in_text_file_version(files[i],text_possibilities=st.session_state.text_list))
+    else : 
+        st.markdown("🗿 Show the results :  ")
+        # st.image(files)
+        for i in range(len(files)):
+            st.image(files[i], width=100, caption=classify_image_in_text_file_version(files[i],text_possibilities=st.session_state.text_list))
+
 
 st.markdown("🌼 Thanks for running me 😊")
